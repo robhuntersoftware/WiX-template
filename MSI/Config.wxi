@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Include>
+  <?define ProductNameNoVersion = "MyProduct"?>
+  <?define ReleaseVersion = "2014.1"?>
+  <?define Manufacturer = "Rob Hunter Software"?>
+
+  <?if $(var.Platform) = x86 ?>
+  <?define PlatformProgramFilesFolder = "ProgramFilesFolder" ?>
+  <?define ProductName = "$(var.ProductNameNoVersion) $(var.ReleaseVersion)" ?>
+  <?define UpgradeCode="{4A69E1B5-4F2F-46FA-8BED-AA106A855C1A}" ?>
+  <?define Wow6432Node="" ?>
+  <?else?>
+  <?define PlatformProgramFilesFolder = "ProgramFiles64Folder" ?>
+  <?define ProductName = "$(var.ProductNameNoVersion)  $(var.ReleaseVersion) (64 bit)" ?>
+  <?define UpgradeCode="{77C1DAB1-EA1B-4A53-A68C-7200F9E0EE75}" ?>
+  <?define Wow6432Node="Wow6432Node\" ?>
+  <?endif?>
+</Include>

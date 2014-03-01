@@ -1,32 +1,57 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
-	<Product Id="*" Name="MyProduct" Language="1033" Version="0.1.0.0" Manufacturer="Rob Hunter Software" UpgradeCode="4A69E1B5-4F2F-46FA-8BED-AA106A855C1A">
+  <?include $(sys.CURRENTDIR)\Config.wxi?>
+	<Product Id="*"
+           Name="$(var.ProductName)" 
+           Language="1033" 
+           Version="!(bind.FileVersion.MyProduct.exe)" 
+           Manufacturer="$(var.Manufacturer)"
+           UpgradeCode="$(var.UpgradeCode)">
 		<Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
 
-		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
-    <MediaTemplate />
+		<MajorUpgrade DowngradeErrorMessage="A newer version of $(var.ProductName) is already installed." />
+    <MediaTemplate EmbedCab="yes" CompressionLevel="high" />
 
+    <Icon Id="MyProductSetup.ico" SourceFile="Resources/MyProduct.ico"/>
+
+
+    <!-- Use WiX InstallDir UI with customizations -->
     <UIRef Id="WixUI_InstallDir" />
+    <WixVariable Id="WixUIBannerBmp" Value="Resources/Setup_TopImage.bmp" />
+    <WixVariable Id="WixUIDialogBmp" Value="Resources/Setup_SideImage.bmp" />
+    <WixVariable Id="WixUILicenseRtf" Value="Resources/EULA.rtf" />
 
-		<Feature Id="ProductFeature" Title="MyProduct" Level="1">
+    <Property Id="WIXUI_INSTALLDIR" Value="INSTALLFOLDER"/>
+    
+    <!-- Add/Remove Program properties -->
+    <Property Id="ARPPRODUCTICON" Value="MyProductSetup.ico" />
+    <Property Id="ARPHELPLINK" Value="http://stackoverflow.com/users/1145/rob-hunter" />
+    <Property Id="ARPCONTACT" Value="robhuntersoftware@gmail.com" />
+    <!--Property Id="ARPURLUPDATEINFO" Value="www.?????.com" /-->
+    <!--Property Id="ARPHELPTELEPHONE" Value="+1 (555) 555-5555" /-->
+    <Property Id="ARPCOMMENTS" Value="$(var.ProductName) is an example payload for a WiX installer" />
+    
+    <Property Id="INSTALLDIR" Secure="yes" />
+
+    <Feature Id="ProductFeature" Title="MyProduct" Level="1">
 			<ComponentGroupRef Id="ProductComponents" />
 		</Feature>
 	</Product>
 
 	<Fragment>
 		<Directory Id="TARGETDIR" Name="SourceDir">
-			<Directory Id="ProgramFilesFolder">
-				<Directory Id="INSTALLFOLDER" Name="MyProduct" />
+			<Directory Id="$(var.PlatformProgramFilesFolder)">
+				<Directory Id="INSTALLFOLDER" Name="$(var.ProductNameNoVersion)" />
 			</Directory>
 		</Directory>
 	</Fragment>
 
 	<Fragment>
 		<ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">
-			<!-- TODO: Remove the comments around this Component element and the ComponentRef below in order to add resources to this installer. -->
-			<!-- <Component Id="ProductComponent"> -->
-				<!-- TODO: Insert files, registry keys, and other resources here. -->
-			<!-- </Component> -->
+			<!-- Main application entry executable -->
+			<Component Id="ProductComponent">
+      <File Name="MyProduct.exe" Source="$(var.MyProduct.TargetPath)" />
+			</Component>
 		</ComponentGroup>
 	</Fragment>
 </Wix>

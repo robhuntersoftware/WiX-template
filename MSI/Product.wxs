@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
-	<Product Id="*" Name="MSI" Language="1033" Version="1.0.0.0" Manufacturer="Schlumberger" UpgradeCode="06e1203c-40cf-4a13-8803-5a71ebc9b120">
+	<Product Id="*" Name="MyProduct" Language="1033" Version="0.1.0.0" Manufacturer="Rob Hunter Software" UpgradeCode="4A69E1B5-4F2F-46FA-8BED-AA106A855C1A">
 		<Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
 
 		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
-		<MediaTemplate />
+    <MediaTemplate />
 
-		<Feature Id="ProductFeature" Title="MSI" Level="1">
+    <UIRef Id="WixUI_InstallDir" />
+
+		<Feature Id="ProductFeature" Title="MyProduct" Level="1">
 			<ComponentGroupRef Id="ProductComponents" />
 		</Feature>
 	</Product>
@@ -14,7 +16,7 @@
 	<Fragment>
 		<Directory Id="TARGETDIR" Name="SourceDir">
 			<Directory Id="ProgramFilesFolder">
-				<Directory Id="INSTALLFOLDER" Name="MSI" />
+				<Directory Id="INSTALLFOLDER" Name="MyProduct" />
 			</Directory>
 		</Directory>
 	</Fragment>

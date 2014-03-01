@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "MSI", "MSI\MSI.wixproj", "{45325E8C-CF08-45BB-81A9-7EB8C4F5D7DC}"
+Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "MyProduct_Setup", "MSI\MyProduct_Setup.wixproj", "{45325E8C-CF08-45BB-81A9-7EB8C4F5D7DC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
